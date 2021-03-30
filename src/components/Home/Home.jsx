@@ -9,7 +9,7 @@ const Home = () => {
       <section id="search_option">
         <div className="d-flex justify-content-center mt-5">
           <InputGroup
-            className="mb-4 mt-5 border border-primary rounded-lg"
+            className="mb-4 mt-5 mx-3 border border-primary rounded-lg"
             style={{ maxWidth: "570px" }}
           >
             <FormControl placeholder="search product..." />
