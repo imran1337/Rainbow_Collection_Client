@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Container, FormControl, InputGroup } from "react-bootstrap";
-import Header from "../Header/Header";
 import HomeProductCard from "../HomeProductCard/HomeProductCard";
+import axios from "axios";
+import { CircularProgress } from "@material-ui/core";
+import "./Home.css";
 
 const Home = () => {
+  const [products, setProducts] = useState([]);
+
+  const getProduct = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5000/get-product`);
+      setProducts(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getProduct();
+  }, []);
+
   return (
     <div>
       <section id="search_option">
@@ -21,21 +39,30 @@ const Home = () => {
           </InputGroup>
         </div>
 
-        <Container
-          fluid
-          className="mt-5 d-flex flex-wrap justify-content-center align-items-center"
-        >
-          <HomeProductCard />
-          <HomeProductCard />
-          <HomeProductCard />
-          <HomeProductCard />
-          <HomeProductCard />
-          <HomeProductCard />
-          <HomeProductCard />
-          <HomeProductCard />
-          <HomeProductCard />
-          <HomeProductCard />
-        </Container>
+        {products.length === 0 ? (
+          <div class="home_spinner_center">
+            <CircularProgress />
+          </div>
+        ) : (
+          <Container
+            fluid
+            className="mt-5 d-flex flex-wrap justify-content-center align-items-center"
+          >
+            {products.length &&
+              products.map((product) => {
+                console.log(product);
+                const { _id, name, price, imageURL } = product;
+                return (
+                  <HomeProductCard
+                    name={name}
+                    price={price}
+                    imageURL={imageURL}
+                    _id={_id}
+                  />
+                );
+              })}
+          </Container>
+        )}
       </section>
     </div>
   );

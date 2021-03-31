@@ -1,0 +1,13 @@
+import React, { useState } from "react";
+import { Container } from "react-bootstrap";
+import PersistentDrawerLeft from "./../Drawer/Drawer";
+
+const Dashboard = () => {
+  return (
+    <Container fluid>
+      <PersistentDrawerLeft />
+    </Container>
+  );
+};
+
+export default Dashboard;

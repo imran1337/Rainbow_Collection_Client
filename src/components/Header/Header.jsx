@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./Header.css";
+import { userContext } from "./../../App";
+import SimpleMenu from "./SimpleMenu/SimpleMenu";
 
 const Header = () => {
+  const [loggedInUser, setLoggedInUser] = useContext(userContext);
   return (
     <Navbar
       collapseOnSelect
@@ -21,7 +24,7 @@ const Header = () => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="ml-auto">
+          <Nav className="ml-auto d-flex align-items-center">
             <Link to="/home" className="nav-link">
               Home
             </Link>
@@ -34,11 +37,16 @@ const Header = () => {
             <Link to="/deals" className="nav-link">
               Deals
             </Link>
-            <Button variant="primary" className="nav-link w-100">
-              <Link className="px-3 font-weight-bold text-dark" to="/login">
-                Login
+            {(loggedInUser?.email && <SimpleMenu />) || (
+              <Link
+                className="px-3 font-weight-bold text-dark nav-link"
+                to="/login"
+              >
+                <Button variant="primary" className="w-100">
+                  Login
+                </Button>
               </Link>
-            </Button>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
