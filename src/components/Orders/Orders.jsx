@@ -14,7 +14,7 @@ const Orders = () => {
     }
 
     try {
-      const response = await axios(`http://localhost:5000/get-orders`, {
+      const response = await axios(`https://nameless-lowlands-72199.herokuapp.com/get-orders`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

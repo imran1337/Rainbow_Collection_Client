@@ -39,7 +39,7 @@ const HomeProductCard = ({ _id, name, price, imageURL }) => {
         productId: _id,
       };
 
-      const response = await axios(`http://localhost:5000/add-to-cart`, {
+      const response = await axios(`https://nameless-lowlands-72199.herokuapp.com/add-to-cart`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

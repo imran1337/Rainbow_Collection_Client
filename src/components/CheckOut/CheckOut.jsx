@@ -25,7 +25,7 @@ const CheckOut = () => {
     }
 
     try {
-      const response = await axios(`http://localhost:5000/get-cart-products`, {
+      const response = await axios(`https://nameless-lowlands-72199.herokuapp.com/get-cart-products`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -57,7 +57,7 @@ const CheckOut = () => {
     setFilteredCartId(filterUnique);
     try {
       const response = await axios(
-        "http://localhost:5000/get-product-details-by-id",
+        "https://nameless-lowlands-72199.herokuapp.com/get-product-details-by-id",
         {
           method: "POST",
           headers: {
@@ -92,7 +92,7 @@ const CheckOut = () => {
     console.log(checkOutProducts);
 
     try {
-      const response = await axios(`http://localhost:5000/submit-order`, {
+      const response = await axios(`https://nameless-lowlands-72199.herokuapp.com/submit-order`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -113,7 +113,7 @@ const CheckOut = () => {
     //   _id,
     //   email: auth.currentUser.email,
     // };
-    // const response = await axios(`http://localhost:5000/delete-cart-product`, {
+    // const response = await axios(`https://nameless-lowlands-72199.herokuapp.com/delete-cart-product`, {
     //   method: "POST",
     //   headers: {
     //     "Content-Type": "application/json",

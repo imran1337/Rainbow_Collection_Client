@@ -11,7 +11,7 @@ const Home = () => {
 
   const getProduct = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/get-product`);
+      const response = await axios.get(`https://nameless-lowlands-72199.herokuapp.com/get-product`);
       setProducts(response.data);
       console.log(response.data);
     } catch (error) {
