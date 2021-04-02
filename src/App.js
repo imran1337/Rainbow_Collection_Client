@@ -12,6 +12,7 @@ import Orders from "./components/Orders/Orders";
 import "react-toastify/dist/ReactToastify.css";
 import CheckOut from "./components/CheckOut/CheckOut";
 import PrivateRoute, {
+import Deals from './components/Deals/Deals';
   PrivateRoute2,
 } from "./components/PrivateRoute/PrivateRoute";
 
@@ -54,6 +55,9 @@ function App() {
           </PrivateRoute>
           <PrivateRoute path="/checkout">
             <CheckOut />
+          </PrivateRoute>
+          <PrivateRoute path="/deals">
+            <Deals />
           </PrivateRoute>
           <Route path="*" component={NotFound} />
         </Switch>
