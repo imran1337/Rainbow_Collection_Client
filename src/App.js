@@ -12,10 +12,9 @@ import Orders from "./components/Orders/Orders";
 import "react-toastify/dist/ReactToastify.css";
 import CheckOut from "./components/CheckOut/CheckOut";
 import PrivateRoute, {
-import Deals from './components/Deals/Deals';
   PrivateRoute2,
 } from "./components/PrivateRoute/PrivateRoute";
-
+import Deals from "./components/Deals/Deals";
 export const userContext = React.createContext();
 
 function App() {
