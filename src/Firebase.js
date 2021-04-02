@@ -32,7 +32,7 @@ export const socialMediaLogin = async (providerName, setError, redirect) => {
 
 export const signOut = async () => {
   try {
-    sessionStorage.removeItem("idToken");
+    localStorage.removeItem("idToken");
     await auth.signOut();
   } catch (error) {
     const err = await error;

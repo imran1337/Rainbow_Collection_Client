@@ -2,29 +2,25 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import { auth } from "../../Firebase";
+import "./Orders.css";
 const Orders = () => {
-  window.document.title = 'Rainbow || Orders'
+  window.document.title = "Rainbow || Orders";
   const [orders, setOrders] = useState([]);
   const [orderedProduct, setOrderedProduct] = useState([]);
 
   const getOrder = async () => {
     if (!auth.currentUser) {
-      return alert(
-        "auth token not found. Click Home then comeback again Orders"
-      );
+      return alert("auth token not found");
     }
 
     try {
-      const response = await axios(
-        `http://localhost:5000/get-orders`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            authorization: `Bearer ${sessionStorage.getItem("idToken")}`,
-          },
-        }
-      );
+      const response = await axios(`http://localhost:5000/get-orders`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("idToken")}`,
+        },
+      });
       setOrders(response.data);
       console.log(response.data);
     } catch (error) {
@@ -47,35 +43,37 @@ const Orders = () => {
   }, [orders, setOrders]);
 
   return (
-    <div className="d-flex flex-wrap justify-content-center align-items-center">
-      {orderedProduct.map((pd) => {
-        return (
-          <Card
-            style={{
-              maxWidth: "280px",
-              minWidth: "280px",
-              maxHeight: "120px",
-              minHeight: "120px",
-            }}
-            className="m-2"
-          >
-            <Card.Body>
-              <Row>
-                <Col xs={4}>
-                  <img
-                    style={{ maxWidth: "50px" }}
-                    className="img-fluid"
-                    src={pd.imageURL}
-                    alt="product"
-                  />
-                </Col>
-                <Col xs={8}>{pd.name}</Col>
-              </Row>
-            </Card.Body>
-          </Card>
-        );
-      })}
-    </div>
+    <>
+      <h2 className="text-center my-4">
+        {auth.currentUser.displayName || "Your"} order history
+      </h2>
+      <div className="d-flex flex-wrap justify-content-center align-items-center">
+        {orderedProduct.map((pd) => {
+          const { name, price, imageURL, createdAt } = pd;
+          return (
+            <Card className="bg-dark text-white m-2 grow" style={{maxWidth:'420px'}}>
+              <Card.Img
+                src={imageURL}
+                className="bg-style"
+                alt="Product"
+                style={{ filter: "blur(2px)" }}
+              />
+              <Card.ImgOverlay className="d-flex justify-content-center flex-column align-items-center">
+                <Card.Title>{name}</Card.Title>
+                <Card.Text>
+                  <h3>&#2547;{price}</h3>
+                </Card.Text>
+                <Card.Text>
+                  <i>
+                    Order Submitted on {new Date(createdAt).toLocaleString()}
+                  </i>
+                </Card.Text>
+              </Card.ImgOverlay>
+            </Card>
+          );
+        })}
+      </div>
+    </>
   );
 };
 

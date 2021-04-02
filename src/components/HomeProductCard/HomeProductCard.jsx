@@ -43,7 +43,7 @@ const HomeProductCard = ({ _id, name, price, imageURL }) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          authorization: `Bearer ${sessionStorage.getItem("idToken")}`,
+          authorization: `Bearer ${localStorage.getItem("idToken")}`,
         },
         data: productDetails,
       });

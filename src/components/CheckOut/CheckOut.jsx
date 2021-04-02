@@ -29,7 +29,7 @@ const CheckOut = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          authorization: `Bearer ${sessionStorage.getItem("idToken")}`,
+          authorization: `Bearer ${localStorage.getItem("idToken")}`,
         },
       });
       setCart(response.data);
@@ -62,7 +62,7 @@ const CheckOut = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            authorization: `Bearer ${sessionStorage.getItem("idToken")}`,
+            authorization: `Bearer ${localStorage.getItem("idToken")}`,
           },
           data: filterUnique,
         }
@@ -96,7 +96,7 @@ const CheckOut = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          authorization: `Bearer ${sessionStorage.getItem("idToken")}`,
+          authorization: `Bearer ${localStorage.getItem("idToken")}`,
         },
         data: checkOutProducts,
       });
@@ -117,7 +117,7 @@ const CheckOut = () => {
     //   method: "POST",
     //   headers: {
     //     "Content-Type": "application/json",
-    //     authorization: `Bearer ${sessionStorage.getItem("idToken")}`,
+    //     authorization: `Bearer ${localStorage.getItem("idToken")}`,
     //   },
     //   data: removeProductDetail,
     // });

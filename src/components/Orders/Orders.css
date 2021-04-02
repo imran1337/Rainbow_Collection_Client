@@ -1,0 +1,13 @@
+.bg-style{
+    /* filter: blur(1px); */
+    background-color: blue;
+    opacity: .4;
+}
+
+.grow{
+    transition: all .3s ease-in-out;
+}
+
+.grow:hover{
+    transform: scale(1.05);
+}

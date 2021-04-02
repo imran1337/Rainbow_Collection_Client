@@ -21,7 +21,7 @@ const Login = () => {
 
   async function storeIdToken() {
     const idToken = await auth.currentUser.getIdToken(true);
-    sessionStorage.setItem("idToken", idToken);
+    localStorage.setItem("idToken", idToken);
   }
 
   const redirect = async () => {
