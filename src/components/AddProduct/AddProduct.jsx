@@ -11,9 +11,9 @@ const AddProduct = () => {
       enforce(data.name).isNotEmpty();
     });
 
-    // test("size", "Size is required", () => {
-    //   enforce(data.size).isNotEmpty();
-    // });
+    test("size", "Size is required", () => {
+      enforce(data.size).isNotEmpty();
+    });
 
     test("price", "Price is required", () => {
       enforce(data.price).isNotEmpty();
@@ -33,13 +33,16 @@ const AddProduct = () => {
       return alert("image not uploaded yet!");
     }
     data.imageURL = imgURL;
-    console.log(data);
+    console.log(data.size);
     try {
-      const response = await axios.post(
-        "http://localhost:5000/add-product",
-        data
-      );
+      const response = await axios.post("https://nameless-lowlands-72199.herokuapp.com/add-product", {
+        ...data,
+        size: data.size.split(","),
+      });
       console.log(response.data);
+      if (response.data.price) {
+        alert("Product Added");
+      }
       setImageURL(null);
       reset();
     } catch (error) {
@@ -88,7 +91,7 @@ const AddProduct = () => {
 
           <Form.Group as={Col} xs={12} md={6}>
             <Form.Label htmlFor="size">Size</Form.Label>
-            <Form.Control type="text" id="size" name="size" />
+            <Form.Control type="text" id="size" name="size" ref={register} />
           </Form.Group>
 
           <Form.Group as={Col} xs={12} md={6}>

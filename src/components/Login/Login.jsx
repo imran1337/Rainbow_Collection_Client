@@ -6,15 +6,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faGithub } from "@fortawesome/free-brands-svg-icons";
 import { GoogleProvider, socialMediaLogin } from "./../../Firebase";
 import { useState } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 
 const Login = () => {
+  let history = useHistory();
+  let location = useLocation();
+  let { from } = location.state || { from: { pathname: "/" } };
+
   const [error, setError] = useState({
     isError: true,
     errCode: "",
     errMsg: "",
   });
-  
-  const redirect = () => {};
+
+  const redirect = () => {
+    history.replace(from);
+    console.log("redirected");
+  };
 
   return (
     <Container

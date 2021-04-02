@@ -8,7 +8,12 @@ import Login from "./components/Login/Login";
 import Header from "./components/Header/Header";
 import { auth } from "./Firebase";
 import Dashboard from "./components/Dashboard/Dashboard";
-import Orders from './components/Orders/Orders';
+import Orders from "./components/Orders/Orders";
+import "react-toastify/dist/ReactToastify.css";
+import CheckOut from "./components/CheckOut/CheckOut";
+import PrivateRoute, {
+  PrivateRoute2,
+} from "./components/PrivateRoute/PrivateRoute";
 
 export const userContext = React.createContext();
 
@@ -38,15 +43,18 @@ function App() {
           <Route path="/home">
             <Home />
           </Route>
-          <Route path="/login">
+          <PrivateRoute2 path="/login">
             <Login />
-          </Route>
-          <Route path="/dashboard">
+          </PrivateRoute2>
+          <PrivateRoute path="/dashboard">
             <Dashboard />
-          </Route>
-          <Route path="/orders">
+          </PrivateRoute>
+          <PrivateRoute path="/orders">
             <Orders />
-          </Route>
+          </PrivateRoute>
+          <PrivateRoute path="/checkout">
+            <CheckOut />
+          </PrivateRoute>
           <Route path="*" component={NotFound} />
         </Switch>
       </BrowserRouter>

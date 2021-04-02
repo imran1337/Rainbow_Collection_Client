@@ -37,7 +37,14 @@ const Header = () => {
             <Link to="/deals" className="nav-link">
               Deals
             </Link>
-            {(loggedInUser?.email && <SimpleMenu />) || (
+            {(loggedInUser?.email && (
+              <>
+                <Link to="/checkout" className="nav-link">
+                  Cart
+                </Link>{" "}
+                <SimpleMenu />
+              </>
+            )) || (
               <Link
                 className="px-3 font-weight-bold text-dark nav-link"
                 to="/login"
