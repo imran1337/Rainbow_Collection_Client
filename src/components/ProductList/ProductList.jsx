@@ -19,7 +19,7 @@ const ProductList = () => {
       const newData = { ...data, size: sizeArray };
       console.log(newData);
       const response = await axios(
-        `https://nameless-lowlands-72199.herokuapp.com/edit-product-by-id/${data._id}`,
+        `http://localhost:5000/edit-product-by-id/${data._id}`,
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
@@ -40,7 +40,7 @@ const ProductList = () => {
 
   const getProducts = async () => {
     try {
-      const response = await axios.get(`https://nameless-lowlands-72199.herokuapp.com/get-product`);
+      const response = await axios.get(`http://localhost:5000/get-product`);
       setProducts(response.data);
       console.log(response.data);
     } catch (error) {
@@ -53,7 +53,7 @@ const ProductList = () => {
   }, []);
 
   const removeProduct = (_id) => {
-    fetch(`https://nameless-lowlands-72199.herokuapp.com/remove-product`, {
+    fetch(`http://localhost:5000/remove-product`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ _id }),
@@ -93,7 +93,7 @@ const ProductList = () => {
       console.log(event.target.parentNode.parentElement.parentNode);
       console.log(_id);
       const response = await axios.get(
-        `https://nameless-lowlands-72199.herokuapp.com/get-single-product-details-by-id/${_id}`
+        `http://localhost:5000/get-single-product-details-by-id/${_id}`
       );
       setEditProductDetails(response.data);
       setModalShow(true);

@@ -4,7 +4,7 @@ import LoginCard from "./LoginCard";
 import "./Login.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faGithub } from "@fortawesome/free-brands-svg-icons";
-import { GoogleProvider, socialMediaLogin } from "./../../Firebase";
+import { GoogleProvider, socialMediaLogin, auth } from "./../../Firebase";
 import { useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 
@@ -19,7 +19,13 @@ const Login = () => {
     errMsg: "",
   });
 
-  const redirect = () => {
+  async function storeIdToken() {
+    const idToken = await auth.currentUser.getIdToken(true);
+    sessionStorage.setItem("idToken", idToken);
+  }
+
+  const redirect = async () => {
+    storeIdToken();
     history.replace(from);
     console.log("redirected");
   };

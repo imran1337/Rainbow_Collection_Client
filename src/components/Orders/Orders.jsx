@@ -2,8 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import { auth } from "../../Firebase";
-
 const Orders = () => {
+  window.document.title = 'Rainbow || Orders'
   const [orders, setOrders] = useState([]);
   const [orderedProduct, setOrderedProduct] = useState([]);
 
@@ -15,14 +15,16 @@ const Orders = () => {
     }
 
     try {
-      const idToken = await auth.currentUser.getIdToken(true);
-      const response = await axios(`https://nameless-lowlands-72199.herokuapp.com/get-orders`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${idToken}`,
-        },
-      });
+      const response = await axios(
+        `http://localhost:5000/get-orders`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${sessionStorage.getItem("idToken")}`,
+          },
+        }
+      );
       setOrders(response.data);
       console.log(response.data);
     } catch (error) {

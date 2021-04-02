@@ -35,7 +35,7 @@ const AddProduct = () => {
     data.imageURL = imgURL;
     console.log(data.size);
     try {
-      const response = await axios.post("https://nameless-lowlands-72199.herokuapp.com/add-product", {
+      const response = await axios.post("http://localhost:5000/add-product", {
         ...data,
         size: data.size.split(","),
       });

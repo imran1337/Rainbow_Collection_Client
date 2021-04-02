@@ -7,6 +7,7 @@ import { CircularProgress } from "@material-ui/core";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 
 const CheckOut = () => {
+  window.document.title = "Rainbow || Checkout";
   const [cart, setCart] = useState([]);
   const [fiteredCartId, setFilteredCartId] = useState([]);
   const [cartProduct, setCartProduct] = useState([]);
@@ -15,7 +16,7 @@ const CheckOut = () => {
 
   const redirect = () => {
     alert("auth token not found");
-    history.push("/");
+    history.push("/login");
   };
 
   const getCart = async () => {
@@ -24,12 +25,11 @@ const CheckOut = () => {
     }
 
     try {
-      const idToken = await auth.currentUser.getIdToken(true);
-      const response = await axios(`https://nameless-lowlands-72199.herokuapp.com/get-cart-products`, {
+      const response = await axios(`http://localhost:5000/get-cart-products`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          authorization: `Bearer ${idToken}`,
+          authorization: `Bearer ${sessionStorage.getItem("idToken")}`,
         },
       });
       setCart(response.data);
@@ -56,14 +56,13 @@ const CheckOut = () => {
     );
     setFilteredCartId(filterUnique);
     try {
-      const idToken = await auth.currentUser.getIdToken(true);
       const response = await axios(
-        "https://nameless-lowlands-72199.herokuapp.com/get-product-details-by-id",
+        "http://localhost:5000/get-product-details-by-id",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            authorization: `Bearer ${idToken}`,
+            authorization: `Bearer ${sessionStorage.getItem("idToken")}`,
           },
           data: filterUnique,
         }
@@ -93,12 +92,11 @@ const CheckOut = () => {
     console.log(checkOutProducts);
 
     try {
-      const idToken = await auth.currentUser.getIdToken(true);
-      const response = await axios(`https://nameless-lowlands-72199.herokuapp.com/submit-order`, {
+      const response = await axios(`http://localhost:5000/submit-order`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          authorization: `Bearer ${idToken}`,
+          authorization: `Bearer ${sessionStorage.getItem("idToken")}`,
         },
         data: checkOutProducts,
       });
@@ -111,16 +109,15 @@ const CheckOut = () => {
   };
 
   const removeCartProduct = async (_id) => {
-    // const idToken = await auth.currentUser.getIdToken(true);
     // const removeProductDetail = {
     //   _id,
     //   email: auth.currentUser.email,
     // };
-    // const response = await axios(`https://nameless-lowlands-72199.herokuapp.com/delete-cart-product`, {
+    // const response = await axios(`http://localhost:5000/delete-cart-product`, {
     //   method: "POST",
     //   headers: {
     //     "Content-Type": "application/json",
-    //     authorization: `Bearer ${idToken}`,
+    //     authorization: `Bearer ${sessionStorage.getItem("idToken")}`,
     //   },
     //   data: removeProductDetail,
     // });

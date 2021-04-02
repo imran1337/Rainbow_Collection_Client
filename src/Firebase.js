@@ -10,32 +10,32 @@ const app = firebase.initializeApp({
   appId: process.env.REACT_APP_APP_ID,
 });
 
-
 export const auth = app.auth();
 export const GoogleProvider = new firebase.auth.GoogleAuthProvider();
 
 export const socialMediaLogin = async (providerName, setError, redirect) => {
-    try {
-      await auth.signInWithPopup(providerName);
-      await redirect()
-    } catch (error) {
-      const err = await error;
-      const errCode = err.code;
-      const errMsg = err.message;
-      setError({
-        isError: true,
-        errCode,
-        errMsg,
-      });
-      console.log(err);
-    }
-  };
-  
-  export const signOut = async () => {
-    try {
-      await auth.signOut();
-    } catch (error) {
-      const err = await error;
-      console.log(err);
-    }
-  };
+  try {
+    await auth.signInWithPopup(providerName);
+    await redirect();
+  } catch (error) {
+    const err = await error;
+    const errCode = err.code;
+    const errMsg = err.message;
+    setError({
+      isError: true,
+      errCode,
+      errMsg,
+    });
+    console.log(err);
+  }
+};
+
+export const signOut = async () => {
+  try {
+    sessionStorage.removeItem("idToken");
+    await auth.signOut();
+  } catch (error) {
+    const err = await error;
+    console.log(err);
+  }
+};

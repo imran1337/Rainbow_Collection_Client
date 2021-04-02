@@ -6,11 +6,12 @@ import { CircularProgress } from "@material-ui/core";
 import "./Home.css";
 
 const Home = () => {
+  window.document.title = "Rainbow || Home";
   const [products, setProducts] = useState([]);
 
   const getProduct = async () => {
     try {
-      const response = await axios.get(`https://nameless-lowlands-72199.herokuapp.com/get-product`);
+      const response = await axios.get(`http://localhost:5000/get-product`);
       setProducts(response.data);
       console.log(response.data);
     } catch (error) {
